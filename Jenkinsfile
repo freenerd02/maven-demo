@@ -11,6 +11,15 @@ pipeline {
         }
 
 
+        stage('Unit tests + SonarQube Scan') {
+            steps{
+                script{
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh 'mvn verify sonar:sonar'
+                    }
+                }
+            }  
+        }
         // stage('Unit tests + SonarQube Scan') {
         //     steps{
         //         script{
