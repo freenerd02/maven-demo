@@ -12,7 +12,10 @@ pipeline {
             steps{
                 script{ 
                     withSonarQubeEnv('SonarQubeServer10') {
-                        sh "mvn verify sonar:sonar -Dsonar.login=2f8314b6665338c06912fcffa64e481ee74ebbdf"
+                        withCredentials([string(credentialsId: 'developer01-token', variable: 'TOKEN')]) { 
+                            sh "mvn verify sonar:sonar -Dsonar.login='${TOKEN}'"
+                        }
+                        
                     }
                 }
             }
