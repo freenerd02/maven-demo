@@ -13,7 +13,7 @@ pipeline {
                 script{ 
                     withSonarQubeEnv('SonarQubeServer10') {
                         withCredentials([string(credentialsId: 'developer01-token', variable: 'TOKEN')]) { 
-                            sh "mvn verify sonar:sonar -Dsonar.login='${TOKEN}'"
+                            sh "mvn verify sonar:sonar -Dsonar.login=$TOKEN "
                         }
                         
                     }
