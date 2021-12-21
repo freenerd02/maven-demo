@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Clean Package') {
             steps {
-                sh 'mvn clean package -DskipTests -Dsonar.login=b1637ad391792e6224afc867bb75c5dbf06417bb'
+                sh 'mvn clean package -DskipTests'
                 stash includes: 'target/*', name: 'target'
             }
         }
@@ -15,7 +15,7 @@ pipeline {
         //     steps{
         //         script{
         //             withSonarQubeEnv('SonarQubeServer') {
-        //                 sh './mvnw verify sonar:sonar'
+        //                 sh 'mvn verify sonar:sonar'
         //             }
         //         }
         //     }
@@ -29,7 +29,7 @@ pipeline {
 
         stage('Maven Install') {
             steps {
-                sh './mvnw install -DskipTests'
+                sh 'mvn install -DskipTests'
             }
         }
 
